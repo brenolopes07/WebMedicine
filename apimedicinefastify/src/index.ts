@@ -1,6 +1,7 @@
 import Fastify, { fastify } from "fastify";
 import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes";
+import { pacienteRoutes } from "./routes/pacienteRoutes";
 
 
 const app = fastify();
@@ -8,6 +9,8 @@ const app = fastify();
 dotenv.config();
 
 app.register (authRoutes);
+app.register (pacienteRoutes);
+
 
 // Iniciar o servidor
 const start = async () => {
