@@ -1,16 +1,16 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import { getPacienteService, updatePacienteService } from "../services/pacienteService";
+import { profilePacienteService, updatePacienteService } from "../services/pacienteService";
 
-export const getpaciente = async (req: FastifyRequest, reply: FastifyReply) => {
+export const profilePacienteController = async (req: FastifyRequest, reply: FastifyReply) => {
     const userId = req.user?.id;
     try{
         if (!userId) {
             throw new Error("UserId nao encontrado");
         }
-        const paciente = await getPacienteService(userId);
+        const paciente = await profilePacienteService(userId);
         return reply.status(200).send(paciente);        
     } catch(err){
-        return reply.status(400).send({message: "Erro ao buscar paciente"});
+        return reply.status(400).send({message: "Nao foi possivel acessar seu perfil"});
     }
 };
 

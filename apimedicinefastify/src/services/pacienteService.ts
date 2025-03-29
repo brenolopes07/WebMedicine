@@ -1,8 +1,15 @@
 import { prisma } from '../prisma/prisma';
 
-export const getPacienteService = async (id: string) => {
+export const profilePacienteService = async (id: string) => {
     const paciente = await prisma.paciente.findUnique({
         where: {userId: id},
+        select: {
+            name:true,
+            phone: true,
+            adress:true,
+            Plano:true,
+            createdAt:true,
+        }
     });
 
     if(!paciente){
