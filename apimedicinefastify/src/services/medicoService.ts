@@ -38,3 +38,32 @@ export const profileMedicoService = async (id: string) => {
 
     return medico;
 }
+
+
+
+export const updateMedicoService = async (id:string, data:{
+    name?:string,
+    phone?:string,
+    especialidade?:string,
+    Planos?:{name: string}[],
+}) => {
+    const planosID = await prisma.planodeSaude.findMany({
+        where: {name:{ in: data.Planos?.map(plano=> plano.name) || []}},
+        select: {id: true }
+    });
+
+    const medico = await prisma.medico.update({
+        where: {userId:id},
+        data:{
+            ...data,
+            Planos: {
+                set:planosID.map(plano=>({id:plano.id}))
+            }
+        }
+    });
+
+    return medico;
+}
+   
+    
+

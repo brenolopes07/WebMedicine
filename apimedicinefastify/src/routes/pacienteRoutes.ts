@@ -5,5 +5,5 @@ import { authenticate, authorizePaciente, authorizeMedico } from "../middlewares
 
 export const pacienteRoutes: FastifyPluginAsync = async (app: FastifyInstance) => {
     app.get('/paciente/profile',{ preHandler: [authenticate]}, profilePacienteController);
-    app.put('/paciente',{ preHandler: [authenticate]}, updatePaciente);
+    app.put('/paciente',{ preHandler: [authenticate, authorizePaciente]}, updatePaciente);
 }
