@@ -1,3 +1,4 @@
+import { error } from 'console';
 import { prisma } from '../prisma/prisma';
 
 export const profilePacienteService = async (id: string) => {
@@ -18,17 +19,37 @@ export const profilePacienteService = async (id: string) => {
     return paciente;
 };
 
-export const updatePacienteService = async (id: string, data: {
+export const updatePacienteService = async (
+  id: string,
+  data: {
     name?: string;
     phone?: string;
     adress?: string;
-    planoId?: string;
-}) =>{
-        const paciente = await prisma.paciente.update({
-            where: {userId: id},
-            data,
+    Planos?: { name: string };
+  }
+) => {
+  let planoId: string | undefined = undefined;
+
+
+  if (data.Planos?.name) {
+    const plano = await prisma.planodeSaude.findUnique({
+      where: { name: data.Planos.name },
+      select: { id: true }
     });
+    planoId = plano?.id;
+  }
 
-return paciente;
+  const paciente = await prisma.paciente.update({
+    where: { userId: id },
+    data: {
+      name: data.name,
+      phone: data.phone,
+      adress: data.adress,
+      planoId: planoId 
+    }
+  });
 
-}
+  return paciente;
+};
+
+

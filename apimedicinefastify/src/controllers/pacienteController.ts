@@ -24,6 +24,6 @@ export const updatePaciente = async (req: FastifyRequest, reply: FastifyReply) =
         const paciente = await updatePacienteService(userId, data);
         return reply.status(200).send(paciente);
     }  catch(err){
-        return reply.status(400).send({message: "Erro ao atualizar os dados"});
+        return reply.status(400).send("Erro ao atualizar os dados!");
     }
 };
