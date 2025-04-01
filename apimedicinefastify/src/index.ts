@@ -17,7 +17,7 @@ app.register (medicoRoutes);
 // Iniciar o servidor
 const start = async () => {
   try {
-    await app.listen({ port: 3000 });
+    await app.listen({ port: 4000 });
     console.log("Server running on http://localhost:3000");
   } catch (err) {
     console.log(err);

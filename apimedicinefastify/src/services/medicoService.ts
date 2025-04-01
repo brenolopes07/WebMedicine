@@ -12,6 +12,9 @@ export const buscarMedicoService = async (filtro: string) => {
         id: true, 
         name: true,
         especialidade: true,
+        horarioFim: true,
+        horarioInicio:true,
+        diasAtendimento:true,
     }
   });
 };
@@ -63,6 +66,26 @@ export const updateMedicoService = async (id:string, data:{
     });
 
     return medico;
+}
+
+export const disponibilidadeMedico = async (id: string,
+    data: {
+        horarioInicio?: string,
+        horarioFim?:string, 
+        diasAtendimento?:string[],
+    }
+) => {
+    const disponibilidade = await prisma.medico.update({
+        where: {userId: id},
+        data:{
+            horarioFim: data.horarioFim,
+            horarioInicio: data.horarioInicio,
+            diasAtendimento: data.diasAtendimento
+        }
+    });
+
+    return disponibilidade;
+
 }
    
     

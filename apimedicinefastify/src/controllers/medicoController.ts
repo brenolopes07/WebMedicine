@@ -1,5 +1,5 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import { buscarMedicoService, profileMedicoService, updateMedicoService } from "../services/medicoService";
+import { buscarMedicoService, profileMedicoService, updateMedicoService, disponibilidadeMedico } from "../services/medicoService";
 
 export const buscarMedicoController = async (req: FastifyRequest < {Querystring: {q:string } }>, res: FastifyReply) => {
     const medicos = await buscarMedicoService(req.query.q);
@@ -36,3 +36,20 @@ export const updateMedicoController = async (req: FastifyRequest, res: FastifyRe
         return res.status(400).send({message: "Erro ao atualizar os dados!"})
     }
 }
+
+export const disponibilidadeMedicoController = async (req:FastifyRequest, res: FastifyReply)=> {
+    const userId = req.user?.id;
+    const data = req.body;
+
+    try{
+        if(!userId || !data){
+            throw new Error ('UserId nao encontrato ou dados nao informados')
+        }
+        const medico = await disponibilidadeMedico (userId, data);
+        return res.status(200).send(medico)
+    } catch (err){
+        return res.status(400).send({ message: "Erro ao atualizar os dados!" });
+    }
+
+}
+    
