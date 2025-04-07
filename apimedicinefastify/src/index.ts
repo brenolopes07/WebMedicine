@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes";
 import { pacienteRoutes } from "./routes/pacienteRoutes";
 import { medicoRoutes } from "./routes/medicoRoutes";
+import { consultaRoutes } from "./routes/consultaRoutes";
 
 
 const app = fastify();
@@ -12,6 +13,7 @@ dotenv.config();
 app.register (authRoutes);
 app.register (pacienteRoutes);
 app.register (medicoRoutes);
+app.register(consultaRoutes);
 
 
 // Iniciar o servidor
