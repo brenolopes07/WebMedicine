@@ -42,6 +42,7 @@ model Medico {
   phone String
   crm String @unique
   especialidade String
+  price String?
   userId String @unique
   Planos PlanodeSaude[]
   User User @relation(fields: [userId], references: [id])
