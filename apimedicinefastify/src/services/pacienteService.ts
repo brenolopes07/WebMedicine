@@ -25,19 +25,9 @@ export const updatePacienteService = async (
     name?: string;
     phone?: string;
     adress?: string;
-    Planos?: { name: string };
+    planoId?: string;
   }
 ) => {
-  let planoId: string | undefined = undefined;
-
-
-  if (data.Planos?.name) {
-    const plano = await prisma.planodeSaude.findUnique({
-      where: { name: data.Planos.name },
-      select: { id: true }
-    });
-    planoId = plano?.id;
-  }
 
   const paciente = await prisma.paciente.update({
     where: { userId: id },
@@ -45,7 +35,9 @@ export const updatePacienteService = async (
       name: data.name,
       phone: data.phone,
       adress: data.adress,
-      planoId: planoId 
+      planoId: data.planoId,
+    }, include : {
+      Plano: true
     }
   });
 

@@ -27,7 +27,7 @@ export const criarConsulta = async (data:{
             dataConsulta:true,
             status: true,
             medico: {
-                select:{ name: true, especialidade: true, },
+                select:{ name: true, especialidade: true, price: true,},
             },
             paciente:{ select:{ name: true, phone: true, } },
         }         
@@ -67,6 +67,7 @@ export const listarConsulta = async (userId: string)=>{
                 select:{
                     name: true,
                     especialidade: true,
+                    price: true,
                 },
             },
             paciente: {

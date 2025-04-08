@@ -27,11 +27,12 @@ export const profileMedicoService = async (id: string) => {
             especialidade: true,
             phone: true, 
             crm: true,
-            Planos:true,
+            Planos: true,
             horarioInicio: true,
             horarioFim: true,
             diasAtendimento: true,
             createdAt: true,
+            price: true,
         }
 
     });
@@ -48,6 +49,7 @@ export const updateMedicoService = async (id:string, data:{
     name?:string,
     phone?:string,
     especialidade?:string,
+    price?: string,
     Planos?:{name: string}[],
 }) => {
     const planosID = await prisma.planodeSaude.findMany({
@@ -58,11 +60,17 @@ export const updateMedicoService = async (id:string, data:{
     const medico = await prisma.medico.update({
         where: {userId:id},
         data:{
-            ...data,
+            name: data.name,
+            phone: data.phone,
+            especialidade: data.especialidade,
+            price: data.price,
             Planos: {
-                set:planosID.map(plano=>({id:plano.id}))
+                connect:planosID.map(plano=>({id:plano.id}))
             }
-        }
+        },
+        include: {
+            Planos: true,
+        },
     });
 
     return medico;
