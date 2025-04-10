@@ -5,6 +5,7 @@ import { pacienteRoutes } from "./routes/pacienteRoutes";
 import { medicoRoutes } from "./routes/medicoRoutes";
 import { consultaRoutes } from "./routes/consultaRoutes";
 import { planoRoutes } from "./routes/planoRoutes";
+import { consultaPdfRoutes } from "./routes/consultaPdfRoutes";
 
 
 const app = fastify();
@@ -16,6 +17,7 @@ app.register (pacienteRoutes);
 app.register (medicoRoutes);
 app.register(consultaRoutes);
 app.register(planoRoutes);
+app.register(consultaPdfRoutes);
 
 
 // Iniciar o servidor
