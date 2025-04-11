@@ -48,7 +48,7 @@ export default function LoginPage(){
         </div>
         <form
           onSubmit={handleLogin}
-          className="bg-white p-6 rounded-lg shadow-md w-96"
+          className="bg-blue-100 p-6 rounded-lg shadow-md w-96"
         >
           <h2 className="text-2xl text-center font-bold mb-8">Login</h2>
 
@@ -59,22 +59,23 @@ export default function LoginPage(){
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="mb-4"
+            className="mb-4 bg-white"
             required
+            
           ></Input>
           <Input
             type="password"
             placeholder="Senha"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="mb-2"
+            className="mb-2 bg-white"
             required
           ></Input>
           <h3 className="text-sm mt-3 p-2">
             Não possui uma conta{" "}
-            <span className="text-blue-900">Cadastre-se!</span>
+            <span className="text-blue-900 cursor-pointer" onClick={()=> router.push('/cadastro')}>Cadastre-se!</span>
           </h3>
-          <Button type="submit" className="w-full mt-5">
+          <Button type="submit" className="w-full mt-5 bg-blue-400">
             Entrar
           </Button>
         </form>
