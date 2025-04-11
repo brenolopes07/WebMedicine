@@ -6,11 +6,17 @@ import { medicoRoutes } from "./routes/medicoRoutes";
 import { consultaRoutes } from "./routes/consultaRoutes";
 import { planoRoutes } from "./routes/planoRoutes";
 import { consultaPdfRoutes } from "./routes/consultaPdfRoutes";
+import cors from '@fastify/cors'
 
 
 const app = fastify();
 
 dotenv.config();
+
+app.register(cors, {
+  origin: '*',
+  methods: ['GET','POST','DELETE','PUT']
+});
 
 app.register (authRoutes);
 app.register (pacienteRoutes);
