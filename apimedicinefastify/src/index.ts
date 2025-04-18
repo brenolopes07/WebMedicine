@@ -29,7 +29,7 @@ app.register(consultaPdfRoutes);
 // Iniciar o servidor
 const start = async () => {
   try {
-    await app.listen({ port: 5000 });
+    await app.listen({ port: 4000 });
     console.log("Server running on http://localhost:5000");
   } catch (err) {
     console.log(err);
