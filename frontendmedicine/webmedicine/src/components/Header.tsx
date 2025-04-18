@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation";
 import Logo from "./Logo";
 import { Button } from "./ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem,DropdownMenuLabel,DropdownMenuTrigger,DropdownMenuSeparator } from "./ui/dropdown-menu";
-import { Ghost, User } from "lucide-react";
+import { User } from "lucide-react";
 
 export default function HeaderSemLogin(){
     const router = useRouter();
