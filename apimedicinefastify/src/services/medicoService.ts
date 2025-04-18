@@ -15,6 +15,8 @@ export const buscarMedicoService = async (filtro: string) => {
         horarioFim: true,
         horarioInicio:true,
         diasAtendimento:true,
+        price: true,
+        Planos:true,
     }
   });
 };
