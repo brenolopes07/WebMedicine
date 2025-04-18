@@ -42,10 +42,10 @@ export default function HomePage() {
         </div>
 
         <div className="flex mt-5 gap-2 mb-12">
-          <Button className="bg-blue-500 hover:bg-blue-600 text-white cursor-pointer ">
+          <Button onClick={()=> router.push('/login')} className="bg-blue-500 hover:bg-blue-600 text-white cursor-pointer ">
             Entrar
           </Button>
-          <Button className="bg-white hover:bg-blue-500 text-black hover:text-white cursor-pointer">
+          <Button onClick={()=> router.push('/cadastro')} className="bg-white hover:bg-blue-500 text-black hover:text-white cursor-pointer">
             Criar Conta
           </Button>
         </div>
