@@ -11,6 +11,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { format } from "date-fns";
+import { useAuth } from "@/hooks/useAuth";
+import { useRouter } from "next/navigation";
 
 interface AgendarConsultaDialogProps {
   medicoId: string;
@@ -23,6 +25,9 @@ export const AgendarConsultaDialog = ({
   const [loading, setLoading] = useState(false);
   const [sucesso, setSucesso] = useState(false);
   const token = localStorage.getItem("token")
+  const { isAuthenticated } = useAuth();
+  const router = useRouter();
+
 
   const handleAgendar = async () => {
     if (!dataConsulta) return;
@@ -60,7 +65,7 @@ export const AgendarConsultaDialog = ({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="absolute bottom-4 right-4 w-40 bg-blue-500 text-white hover:bg-blue-600 shadow">
+        <Button onClick={() => { isAuthenticated ? sucesso : router.push("/login")}} className="absolute bottom-4 right-4 w-40 bg-blue-500 text-white hover:bg-blue-600 shadow">
           Ver Disponibilidade
         </Button>
       </DialogTrigger>
