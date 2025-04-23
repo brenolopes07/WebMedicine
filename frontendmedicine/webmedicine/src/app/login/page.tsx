@@ -29,11 +29,15 @@ export default function LoginPage(){
             const data = await res.json();
 
             if(!data.token){
-                throw new Error ("Token nao encontrado na resposta");
+                throw new Error ("Token ou tipo de usuario nao encontrado na resposta");
+                console.log(error)
             }
             
             const tokenString = data.token.token;
             localStorage.setItem("token", tokenString);
+
+            const roleString = data.token.role;
+            localStorage.setItem("role", roleString);
 
             router.push("/homepage")
         } catch (err:any){
