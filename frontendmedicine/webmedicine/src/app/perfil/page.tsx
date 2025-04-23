@@ -3,17 +3,47 @@
 import { useAuth } from "@/hooks/useAuth";
 import HeaderSemLogin, { HeaderComLogin } from "@/components/Header";
 import { useEffect, useState } from "react";
+import { ProfilePaciente } from "./components/ProfilePaciente";
+import { ProfileMedico } from "./components/ProfileMedico";
+import { useRouter } from "next/navigation";
+import NotLoginPage from "@/components/NotLogin";
+
+type Usuario = {
+  name: string;
+  especialidade?: string;
+  phone: string;
+  crm?: string;
+  Planos?: string[];
+  horarioInicio?: string;
+  horarioFim?: string;
+  diasAtendimento?: string[];
+  createdAt?: string;
+  price?: string;
+  adress?: string;
+  Plano?: string;
+};
 
 export default function Perfil() {
-  const [usuario, setUsuario] = useState(null);
+  const [usuario, setUsuario] = useState<Usuario | null>(null);
   const [loading, setLoading] = useState(true);
   const [erro, setErro] = useState("");
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isRole } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
     const buscarUsuario = async () => {
       try {
-        let res = await fetch(`http://localhost:4000/paciente/profile`, {
+        let endpoint = "";
+
+        if (isRole === "paciente") {
+          endpoint = "http://localhost:4000/paciente/profile";
+        } else if (isRole === "medico") {
+          endpoint = "http://localhost:4000/medicos/profile";
+        } else {
+          throw new Error("Tipo de usuário não identificado");
+        }
+
+        const res = await fetch(endpoint, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -22,17 +52,7 @@ export default function Perfil() {
         });
 
         if (!res.ok) {
-          res = await fetch(`http://localhost:4000/medicos/profile`, {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          });
-
-          if (!res.ok) {
-            throw new Error("Não foi possível carregar o perfil");
-          }
+          throw new Error("Não foi possível carregar o perfil");
         }
 
         const data = await res.json();
@@ -43,18 +63,34 @@ export default function Perfil() {
       } finally {
         setLoading(false);
       }
-    };
+      };
 
-    buscarUsuario(); // 👉 Aqui você chama a função
-  }, []);
+      if (isAuthenticated && isRole) {
+      buscarUsuario();
+        } else {
+        setLoading(false);
+        }
+    }, [isAuthenticated, isRole]);
+
+  if (loading) return <div>Carregando...</div>;
+  if (erro) return <div>{erro}</div>;
+  if (!isAuthenticated)
+    return (
+      <NotLoginPage></NotLoginPage>
+    );
 
   return (
     <>
       <div>{isAuthenticated ? <HeaderComLogin /> : <HeaderSemLogin />}</div>
-
-      <div className="p-6 max-w-xl mx-auto">            
+      <div>
+        {isRole == "paciente" ? (
+          <ProfilePaciente usuario={usuario!} />
+        ) : isRole === "medico" ? (
+          <ProfileMedico usuario= {usuario!}></ProfileMedico>
+        ) : (
+          <NotLoginPage></NotLoginPage>
+        )}
       </div>
-              
     </>
   );
 }
