@@ -7,6 +7,7 @@ import { ProfilePaciente } from "./components/ProfilePaciente";
 import { ProfileMedico } from "./components/ProfileMedico";
 import { useRouter } from "next/navigation";
 import NotLoginPage from "@/components/NotLogin";
+import { Loader } from "lucide-react";
 
 type Usuario = {
   name: string;
@@ -72,7 +73,12 @@ export default function Perfil() {
         }
     }, [isAuthenticated, isRole]);
 
-  if (loading) return <div>Carregando...</div>;
+  if (loading) return (
+    <div className="flex min-h-screen min-w-screen items-center justify-center bg-gradient-to-r from-blue-400 to-blue-100">
+      <Loader className="size-5"></Loader>
+      <h1 className="font-bold text-1xl">Carregando seu perfil...</h1>
+    </div>
+  );
   if (erro) return <div>{erro}</div>;
   if (!isAuthenticated)
     return (
