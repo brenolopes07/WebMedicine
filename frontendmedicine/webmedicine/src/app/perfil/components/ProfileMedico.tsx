@@ -1,8 +1,9 @@
 "use client";
 
 import { Book, User } from "lucide-react";
-import SearchConsultas from "./SearchConsultas";
+import SearchConsultas from "./SearchConsultasPaciente";
 import { Button } from "@/components/ui/button";
+import SearchConsultasMedico from "./SearchConsultasMedico";
 
 // Primeiro defina a interface/types
 type UsuarioMedico = {
@@ -42,13 +43,19 @@ export function ProfileMedico({ usuario }: ProfileMedicoProps) {
           <p className="font-bold">
             Endereco:<span className="font-normal"> {usuario?.adress}</span>
           </p>
+          <p className="font-bold">
+            Preço por consulta: 
+            <span className="font-normal ml-1">
+              {usuario?.price ? usuario.price : "Preço não informado"}
+            </span>
+          </p>
         </div>
         <Button className="bg-white mt-10 hover:bg-blue-600 text-black hover:text-white text-[15px]">
           Editar dados
         </Button>
       </div>
       <div className="space-y-2 mt-5 p-6 max-w-xl mx-auto flex flex-col bg-gradient-to-t from-blue-300 to-blue-100 rounded-lg mb-5">
-        <SearchConsultas></SearchConsultas>
+        <SearchConsultasMedico></SearchConsultasMedico>
       </div>
     </>
   );

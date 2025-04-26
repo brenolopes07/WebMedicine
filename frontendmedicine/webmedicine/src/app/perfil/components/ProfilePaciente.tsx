@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Book, Pen, Pencil, User } from "lucide-react";
-import SearchConsultas from "./SearchConsultas";
+import SearchConsultas from "./SearchConsultasPaciente";
 
 // Primeiro defina a interface/types
 type UsuarioPaciente = {
@@ -20,12 +20,10 @@ type UsuarioPaciente = {
   Plano?: string;
 };
 interface ProfilePacienteProps {
-    usuario : UsuarioPaciente | null;
+  usuario: UsuarioPaciente | null;
 }
 
 export function ProfilePaciente({ usuario }: ProfilePacienteProps) {
-
-
   return (
     <>
       <div className="space-y-4 p-6 max-w-xl mx-auto mt-10 flex gap-3 bg-gradient-to-l from-blue-400 to-blue-100  rounded-lg">

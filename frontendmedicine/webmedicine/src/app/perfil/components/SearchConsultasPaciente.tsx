@@ -1,0 +1,83 @@
+'use client'
+
+import { useState, useEffect  } from "react"
+import {useRouter} from "next/navigation"
+import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/useAuth";
+import { ModalPagamento } from "./ModalPagamento";
+
+
+export default function SearchConsultas() {
+    const [consultas, setConsultas] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
+    const router = useRouter();
+    const token = localStorage.getItem("token")
+    useEffect(() => {
+        const consulta = async () => {
+            try {
+                const res = await fetch("http://localhost:4000/consultalist", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                if (!res.ok) {
+                    throw new Error("Não foi possível carregar as consultas");
+                }
+
+                const data = await res.json();
+                setConsultas(data);
+            } catch (err) {
+                setError("Erro!");
+            } finally {
+                setLoading(false);
+            }
+        };
+        consulta();
+    }, []);
+    const formatarData = (dataIso: string) => {
+        const data = new Date(dataIso);
+
+        const dataFormatada = data.toLocaleDateString("pt-BR", {
+            day: "2-digit",
+            month: "2-digit", 
+            year: "numeric",
+        });
+
+        const horaFormatada = data.toLocaleTimeString("pt-BR", {
+            hour: "2-digit",
+            minute: "2-digit",
+            timeZone: "UTC",
+        });
+        return `${dataFormatada} às ${horaFormatada}`;
+    }
+
+    return (
+      <>
+        <ul>
+          <h1 className="font-bold text-[20px] flex justify-center mb-4  ">
+            Suas Consultas
+          </h1>
+          {consultas.map((consulta: any) => (
+            <li
+              key={consulta.id}
+              className="flex flex-col gap-2 p-4 border-b border-gray-200"
+            >
+              <h2 className="text-lg font-bold">{consulta.medico.name}</h2>
+              <p className="text-sm text-gray-600">Status: {consulta.status}</p>
+              <p className="text-sm text-gray-600">
+                Data: {formatarData(consulta.dataConsulta)}
+              </p>
+              <p className="text-sm text-gray-600">
+                Preço: {consulta.medico.price}
+              </p>
+              <ModalPagamento valor={consulta.medico.price} />
+            </li>
+          ))}
+        </ul>
+      </>
+    );
+}
