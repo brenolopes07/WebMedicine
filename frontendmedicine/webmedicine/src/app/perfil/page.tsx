@@ -90,7 +90,7 @@ export default function Perfil() {
       <div>{isAuthenticated ? <HeaderComLogin /> : <HeaderSemLogin />}</div>
       <div>
         {isRole == "paciente" ? (
-          <ProfilePaciente usuario={usuario!} />
+          <ProfilePaciente usuario={{ ...usuario!, Plano: usuario?.Plano ? { name: usuario.Plano } : undefined }} />
         ) : isRole === "medico" ? (
           <ProfileMedico usuario= {usuario!}></ProfileMedico>
         ) : (
