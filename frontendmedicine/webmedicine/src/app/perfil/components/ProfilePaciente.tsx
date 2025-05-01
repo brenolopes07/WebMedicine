@@ -1,23 +1,21 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Book, Pen, Pencil, User } from "lucide-react";
 import SearchConsultas from "./SearchConsultasPaciente";
+import { EditarPacienteModal } from "./ModalEditPaciente";
 
-// Primeiro defina a interface/types
 type UsuarioPaciente = {
   name?: string;
   especialidade?: string;
   phone: string;
   crm?: string;
-  Planos?: string[];
   horarioInicio?: string;
   horarioFim?: string;
   diasAtendimento?: string[];
   createdAt?: string;
   price?: string;
   adress?: string;
-  Plano?: string;
+  Plano?: {name: string};
 };
 interface ProfilePacienteProps {
   usuario: UsuarioPaciente | null;
@@ -42,10 +40,11 @@ export function ProfilePaciente({ usuario }: ProfilePacienteProps) {
           <p className="font-bold">
             Endereco:<span className="font-normal"> {usuario?.adress}</span>
           </p>
+          <p className="font-bold">
+            Plano:<span className="font-normal"> {usuario?.Plano?.name}</span>
+          </p>
         </div>
-        <Button className="bg-white mt-10 hover:bg-blue-600 text-black hover:text-white text-[15px]">
-          Editar dados
-        </Button>
+        <EditarPacienteModal></EditarPacienteModal>
       </div>
       <div className="space-y-2 mt-5 p-6 max-w-xl mx-auto flex flex-col bg-gradient-to-t from-blue-300 to-blue-100 rounded-lg mb-5">
         <SearchConsultas />

@@ -18,7 +18,7 @@ type UsuarioMedico = {
   createdAt?: string;
   price?: string;
   adress?: string;
-  Plano?: string;
+
 };
 interface ProfileMedicoProps {
   usuario: UsuarioMedico | null;
@@ -44,9 +44,17 @@ export function ProfileMedico({ usuario }: ProfileMedicoProps) {
             Endereco:<span className="font-normal"> {usuario?.adress}</span>
           </p>
           <p className="font-bold">
-            Preço por consulta: 
+            Preço por consulta:
             <span className="font-normal ml-1">
               {usuario?.price ? usuario.price : "Preço não informado"}
+            </span>
+          </p>
+          <p className="font-bold">
+            Planos:
+            <span className="font-normal ml-1">
+              {usuario?.Planos && usuario.Planos.length > 0
+                ? usuario.Planos.join(", ") // Exibe todos os planos separados por vírgula
+                : "Nenhum plano associado"}
             </span>
           </p>
         </div>
