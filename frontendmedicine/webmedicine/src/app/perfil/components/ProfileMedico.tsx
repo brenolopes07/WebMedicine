@@ -30,6 +30,9 @@ export function ProfileMedico({ usuario }: ProfileMedicoProps) {
       <div className="space-y-4 p-6 max-w-xl mx-auto mt-10 flex gap-3 bg-gradient-to-l from-blue-400 to-blue-100  rounded-lg">
         <User className="size-8"></User>
         <h1 className="text-2xl font-bold">Olá, {usuario?.name}</h1>
+        <div className="flex ml-40">
+          <h2 className="font-bold text-white flex justify-center bg-gray-900 rounded-4xl h-8 w-30 items-center">{usuario?.especialidade}</h2>
+        </div>
       </div>
       <div className="space-y-2 mt-5 p-6 max-w-xl mx-auto flex flex-col bg-gradient-to-l from-blue-400 to-blue-100 rounded-lg">
         <div className="flex gap-2 items-center mb-4">
@@ -53,14 +56,37 @@ export function ProfileMedico({ usuario }: ProfileMedicoProps) {
             Planos:
             <span className="font-normal ml-1">
               {usuario?.Planos && usuario.Planos.length > 0
-                ? usuario.Planos.join(", ") // Exibe todos os planos separados por vírgula
+                ? usuario.Planos.join(", ") 
                 : "Nenhum plano associado"}
             </span>
           </p>
+          <p className="font-bold">
+            Horario de Atendimento:{" "}
+            <span className="font-normal">
+              {" "}
+              {usuario?.horarioInicio} as {usuario?.horarioFim}{" "}
+            </span>
+          </p>
+          <p className="font-bold">
+            Dias de Atendimento:{" "}
+            <span className="font-normal">
+              {usuario?.diasAtendimento
+                ?.map((dia) => {
+                  const trimmed = dia.trim().toLowerCase();
+                  return trimmed.charAt(0).toUpperCase() + trimmed.slice(1);
+                })
+                .join(", ")}
+            </span>
+          </p>
         </div>
-        <Button className="bg-white mt-10 hover:bg-blue-600 text-black hover:text-white text-[15px]">
-          Editar dados
-        </Button>
+        <div className="flex gap-10 justify-center  ">
+          <Button className="bg-white mt-5 hover:bg-blue-600 text-black hover:text-white text-[15px] w-60">
+            Editar dados
+          </Button>
+          <Button className="bg-cyan-300 mt-5 hover:bg-blue-600 text-black hover:text-white text-[15px] w-60">
+            Editar Plano
+          </Button>
+        </div>
       </div>
       <div className="space-y-2 mt-5 p-6 max-w-xl mx-auto flex flex-col bg-gradient-to-t from-blue-300 to-blue-100 rounded-lg mb-5">
         <SearchConsultasMedico></SearchConsultasMedico>

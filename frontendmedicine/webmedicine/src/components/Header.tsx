@@ -38,8 +38,7 @@ export function HeaderComLogin() {
         <Logo />
       </div>
       
-      <div className="flex gap-2 mr-0 md:mr-10 ">
-        <Button className="flex bg-blue-500 hover:bg-blue-600">Consultas</Button>
+      <div className="flex gap-2 mr-0 md:mr-10 ">        
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="bg-blue-500 hover:bg-blue-600 text-white">

@@ -71,7 +71,7 @@ export const AgendarConsultaDialog = ({
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Agendar Consulta</DialogTitle>
+          <DialogTitle>Agendar Consulta</DialogTitle>          
         </DialogHeader>
 
         {!sucesso ? (
