@@ -2,9 +2,9 @@
 
 import { useState, useEffect  } from "react"
 import {useRouter} from "next/navigation"
-import { Button } from "@/components/ui/button";
-import { useAuth } from "@/hooks/useAuth";
 import { ModalPagamento } from "./ModalPagamento";
+import { Button } from "@/components/ui/button";
+
 
 
 export default function SearchConsultas() {
@@ -74,7 +74,20 @@ export default function SearchConsultas() {
               <p className="text-sm text-gray-600">
                 Preço: {consulta.medico.price}
               </p>
-              <ModalPagamento valor={consulta.medico.price} />
+              <div className="flex justify-between">
+                <ModalPagamento valor={consulta.medico.price} />
+                <Button
+                  className="flex mt-4 bg-cyan-500"
+                  onClick={() =>
+                    window.open(
+                      `http://localhost:4000/consultas/${consulta.id}/pdf`,
+                      "_blank"
+                    )
+                  }
+                >
+                  Gerar comprovante
+                </Button>
+              </div>
             </li>
           ))}
         </ul>
