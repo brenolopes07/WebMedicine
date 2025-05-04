@@ -69,6 +69,9 @@ export default function SearchConsultas() {
                 Data: {formatarData(consulta.dataConsulta)}
               </p>
               <p className="text-sm text-gray-600">
+                Nome do Paciente: <span className="font-bold">{consulta.paciente.name}</span>
+              </p>
+              <p className="text-sm text-gray-600">
                 Preço: {consulta.medico.price}
               </p>
               <Button className="bg-red-500 hover:bg-red-700 text-white mt-3 w-[170px]">
