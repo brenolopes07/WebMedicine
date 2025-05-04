@@ -83,8 +83,8 @@ export function ProfileMedico({ usuario }: ProfileMedicoProps) {
           <Button className="bg-white mt-5 hover:bg-blue-600 text-black hover:text-white text-[15px] w-60">
             Editar dados
           </Button>
-          <Button className="bg-cyan-300 mt-5 hover:bg-blue-600 text-black hover:text-white text-[15px] w-60">
-            Editar Plano
+          <Button className="bg-cyan-400 mt-5 hover:bg-blue-600 text-black hover:text-white text-[15px] w-60">
+            Editar Disponibilidade
           </Button>
         </div>
       </div>
