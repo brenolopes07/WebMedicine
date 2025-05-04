@@ -21,7 +21,7 @@ type Usuario = {
   createdAt?: string;
   price?: string;
   adress?: string;
-  Plano?: string;
+  Plano?: {name: string};
 };
 
 export default function Perfil() {
@@ -90,7 +90,7 @@ export default function Perfil() {
       <div>{isAuthenticated ? <HeaderComLogin /> : <HeaderSemLogin />}</div>
       <div>
         {isRole == "paciente" ? (
-          <ProfilePaciente usuario={{ ...usuario!, Plano: usuario?.Plano ? { name: usuario.Plano } : undefined }} />
+          <ProfilePaciente usuario={usuario!} />
         ) : isRole === "medico" ? (
           <ProfileMedico usuario= {usuario!}></ProfileMedico>
         ) : (

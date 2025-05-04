@@ -17,6 +17,7 @@ export default function ListaMedicos (){
     const [medicos, setMedicos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [erro, setErro] = useState('');
+       
 
     useEffect (()=>{
         const buscarMedicos = async () => {

@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import PlanoSelect from "./PlanoSelect";
 
 export function EditarPacienteModal() {
   const [open, setOpen] = useState(false);
@@ -18,6 +19,7 @@ export function EditarPacienteModal() {
   const [adress, setAdress] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");  
+  const [planoId, setPlanoId] = useState(""); 
 
   const handleSubmit = async () => {
     if (!name || !phone || !adress ) {
@@ -32,7 +34,7 @@ export function EditarPacienteModal() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-        body: JSON.stringify({ name, phone, adress, }),
+        body: JSON.stringify({ name, phone, adress, planoId }),
       });
 
       if (!response.ok) {
@@ -81,7 +83,8 @@ export function EditarPacienteModal() {
                 placeholder="Endereço"
                 value={adress}
                 onChange={(e) => setAdress(e.target.value)}
-              />        
+              />     
+              <PlanoSelect value={planoId} onChange={setPlanoId} />    
             </div>
           </div>
 
