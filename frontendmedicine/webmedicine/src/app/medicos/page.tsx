@@ -75,7 +75,7 @@ export default function ListaMedicos (){
                         {medico.price}{" "}
                       </span>
                     </h3>
-                    <p className="text-gray-600">{medico.especialidade}</p>
+                    <p className="text-gray-600">{medico.especialidade}</p>                   
                   </div>
                   <AgendarConsultaDialog medicoId={medico.id} ></AgendarConsultaDialog>
                 </li>

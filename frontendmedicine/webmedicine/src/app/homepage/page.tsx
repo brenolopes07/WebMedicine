@@ -11,7 +11,7 @@ import HeaderSemLogin, { HeaderComLogin } from "@/components/Header";
 export default function HomePage() {
   const [busca, setBusca] = useState('');
   const router = useRouter();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated} = useAuth();
 
   const handleBuscar = () =>{
     if (!busca.trim()) return;
