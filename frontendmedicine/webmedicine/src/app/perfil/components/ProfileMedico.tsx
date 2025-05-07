@@ -4,6 +4,8 @@ import { Book, User } from "lucide-react";
 import SearchConsultas from "./SearchConsultasPaciente";
 import { Button } from "@/components/ui/button";
 import SearchConsultasMedico from "./SearchConsultasMedico";
+import { EditarMedicoModal } from "./ModalEditMedico";
+import { EditarDisponibilidadeModal } from "./EditarDisponibilidadeModal";
 
 // Primeiro defina a interface/types
 type UsuarioMedico = {
@@ -31,7 +33,9 @@ export function ProfileMedico({ usuario }: ProfileMedicoProps) {
         <User className="size-8"></User>
         <h1 className="text-2xl font-bold">Olá, {usuario?.name}</h1>
         <div className="flex ml-40">
-          <h2 className="font-bold text-white flex justify-center bg-gray-900 rounded-4xl h-8 w-30 items-center">{usuario?.especialidade}</h2>
+          <h2 className="font-bold text-white flex justify-center bg-gray-900 rounded-4xl h-8 w-30 items-center">
+            {usuario?.especialidade}
+          </h2>
         </div>
       </div>
       <div className="space-y-2 mt-5 p-6 max-w-xl mx-auto flex flex-col bg-gradient-to-l from-blue-400 to-blue-100 rounded-lg">
@@ -56,7 +60,7 @@ export function ProfileMedico({ usuario }: ProfileMedicoProps) {
             Planos:
             <span className="font-normal ml-1">
               {usuario?.Planos && usuario.Planos.length > 0
-                ? usuario.Planos.join(", ") 
+                ? usuario.Planos.map((plano: any) => plano.name).join(", ")
                 : "Nenhum plano associado"}
             </span>
           </p>
@@ -79,14 +83,10 @@ export function ProfileMedico({ usuario }: ProfileMedicoProps) {
             </span>
           </p>
         </div>
-        <div className="flex gap-10 justify-center  ">
-          <Button className="bg-white mt-5 hover:bg-blue-600 text-black hover:text-white text-[15px] w-60">
-            Editar dados
-          </Button>
-          <Button className="bg-cyan-400 mt-5 hover:bg-blue-600 text-black hover:text-white text-[15px] w-60">
-            Editar Disponibilidade
-          </Button>
-        </div>
+        <div className="flex gap-10 justify-between">
+          <EditarMedicoModal></EditarMedicoModal>
+          <EditarDisponibilidadeModal></EditarDisponibilidadeModal>         
+        </div>        
       </div>
       <div className="space-y-2 mt-5 p-6 max-w-xl mx-auto flex flex-col bg-gradient-to-t from-blue-300 to-blue-100 rounded-lg mb-5">
         <SearchConsultasMedico></SearchConsultasMedico>
