@@ -1,14 +1,13 @@
 import { useState, useEffect  } from "react"
 import {useRouter} from "next/navigation"
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/hooks/useAuth";
+import CancelarConsulta from "./CancelarConsulta";
 
 
 export default function SearchConsultas() {
     const [consultas, setConsultas] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
-    const router = useRouter();
     const token = localStorage.getItem("token")
     useEffect(() => {
         const consulta = async () => {
@@ -64,19 +63,42 @@ export default function SearchConsultas() {
               className="flex flex-col gap-2 p-4 border-b border-gray-200"
             >
               <h2 className="text-lg font-bold">{consulta.medico.name}</h2>
-              <p className="text-sm text-gray-600">Status: {consulta.status}</p>
+              <p className="text-sm text-gray-600">
+                Status:{" "}
+                <span
+                  className={`text-sm text-gray-600 ${
+                    consulta.status === "CANCELADA"
+                      ? "text-red-500 font-bold"
+                      : "text-green-500 font-bold"
+                  }`}
+                >
+                  {consulta.status}
+                </span>
+              </p>
               <p className="text-sm text-gray-600">
                 Data: {formatarData(consulta.dataConsulta)}
               </p>
               <p className="text-sm text-gray-600">
-                Nome do Paciente: <span className="font-bold">{consulta.paciente.name}</span>
+                Nome do Paciente:{" "}
+                <span className="font-bold">{consulta.paciente.name}</span>
               </p>
               <p className="text-sm text-gray-600">
                 Preço: {consulta.medico.price}
               </p>
-              <Button className="bg-red-500 hover:bg-red-700 text-white mt-3 w-[170px]">
-                Cancelar Consulta
-              </Button>
+              <div className="flex justify-between">
+                <CancelarConsulta consultaId={consulta.id} status={consulta.status}></CancelarConsulta>
+                <Button
+                  className="flex mt-4 bg-cyan-500"
+                  onClick={() =>
+                    window.open(
+                      `http://localhost:4000/consultas/${consulta.id}/pdf`,
+                      "_blank"
+                    )
+                  }
+                >
+                  Gerar comprovante
+                </Button>
+              </div>
             </li>
           ))}
         </ul>
