@@ -24,17 +24,22 @@ export const AgendarConsultaDialog = ({
   const [dataConsulta, setDataConsulta] = useState("");
   const [loading, setLoading] = useState(false);
   const [sucesso, setSucesso] = useState(false);
-  const token = localStorage.getItem("token")
+  const [mensagemErro, setMensagemErro] = useState("");
+  const token = localStorage.getItem("token");
   const { isAuthenticated } = useAuth();
   const router = useRouter();
-
 
   const handleAgendar = async () => {
     if (!dataConsulta) return;
 
     setLoading(true);
+    setMensagemErro("");
+
     try {
-      const isoData = format(new Date(dataConsulta), "yyyy-MM-dd'T'HH:mm:ssXXX");
+      const isoData = format(
+        new Date(dataConsulta),
+        "yyyy-MM-dd'T'HH:mm:ssXXX"
+      );
 
       const response = await fetch("http://localhost:4000/consulta", {
         method: "POST",
@@ -50,8 +55,8 @@ export const AgendarConsultaDialog = ({
 
       if (!response.ok) {
         const errorText = await response.text();
-        console.error("Erro do servidor:", errorText);
-        throw new Error("Erro ao agendar");
+        setMensagemErro("Apenas pacientes podem agendar consultas.");
+        return;
       }
 
       setSucesso(true);
@@ -65,13 +70,20 @@ export const AgendarConsultaDialog = ({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button onClick={() => { isAuthenticated ? sucesso : router.push("/login")}} className="absolute bottom-4 right-4 w-40 bg-blue-500 text-white hover:bg-blue-600 shadow">
+        <Button
+          onClick={() => {
+            if (!isAuthenticated) {
+              router.push("/login");
+            }
+          }}
+          className="absolute bottom-4 right-4 w-40 bg-blue-500 text-white hover:bg-blue-600 shadow"
+        >
           Ver Disponibilidade
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Agendar Consulta</DialogTitle>          
+          <DialogTitle>Agendar Consulta</DialogTitle>
         </DialogHeader>
 
         {!sucesso ? (
@@ -82,7 +94,10 @@ export const AgendarConsultaDialog = ({
               value={dataConsulta}
               onChange={(e) => setDataConsulta(e.target.value)}
             />
-            <Button onClick={handleAgendar} disabled={loading} className="mt-5">
+            {mensagemErro && (
+              <p className="text-red-600 text-sm font-medium">{mensagemErro}</p>
+            )}
+            <Button onClick={handleAgendar} disabled={loading} className="mt-2">
               {loading ? "Agendando..." : "Confirmar Agendamento"}
             </Button>
           </div>
