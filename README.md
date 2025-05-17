@@ -1,16 +1,65 @@
-# Webmedicine
-Este projeto é um aplicativo web desenvolvido como parte de um projeto de extensão da minha faculdade. O objetivo é facilitar o agendamento e gerenciamento de consultas médicas, proporcionando uma experiência intuitiva e eficiente para pacientes e médicos.
+# 🏥 WebMedicine – Sistema de Clínica Médica
 
-## Funcionalidades Principais
-- **Agendamento de Consultas**: Os pacientes podem agendar consultas com médicos disponíveis.
-- **Painel do Médico**: Médicos podem visualizar suas agendas, confirmar consultas e acessar históricos de pacientes.
-- **Autenticação Segura**: Sistema de login com autenticação JWT para garantir a segurança dos dados.
-- **Integração com Banco de Dados**: Utilização do Prisma ORM para gerenciamento eficiente do banco de dados.
-- **Interface Responsiva**: Design moderno e responsivo, compatível com dispositivos móveis e desktops.
+Este é um sistema completo para gestão de uma clínica médica, desenvolvido individualmente como parte de um **projeto de extensão da faculdade**. O sistema permite o gerenciamento de pacientes, médicos, planos de saúde e agendamento de consultas.
 
-- ## Tecnologias Utilizadas
-- **Back-end**: Node.js, Fastify, Prisma, PostgreSQL.
-- **Front-end**: React.js, Next.js, Tailwind CSS
-- **Autenticação**: JWT (JSON Web Tokens).
+## 🚀 Tecnologias Utilizadas
 
-EM DESENVOLVIMENTO !!
+### Back-end
+- Node.js
+- Fastify
+- Prisma ORM
+- TypeScript
+- PostgreSQL
+- JWT para autenticação
+
+### Front-end
+- React.js / Next.js
+- Tailwind CSS
+
+### Outros
+- Docker
+- Arquitetura RESTful
+
+## 🎯 Funcionalidades
+- Cadastro e login de pacientes e médicos
+- Agendamento de consultas com seleção de plano de saúde
+- Dashboards personalizados por tipo de usuário
+- Visualização e edição de perfis
+- Tela administrativa para cadastro de médicos e planos
+- Interface moderna e responsiva
+
+## 🖼️ Imagens do Projeto
+
+### Tela de Login
+![Login](./assets/tela%20de%20login.png)
+
+### Tela de Cadastro
+![Cadastro](/assets/tela%20de%20cadastro.png)
+
+### Home Page
+![Home Page](/assets/home%20page.png)
+
+### Seleção de Médicos
+![Seleção de Médicos](/assets/selecao%20de%20medicos.png)
+
+### Agendar Consulta
+![Agendar Consulta](/assets/agendar%20consulta.png)
+
+### Perfil Paciente
+![Perfil Paciente](/assets/perfil%20paciente.png)
+
+### Perfil Médico
+![Perfil Médico](/assets/perfil%20medico.png)
+
+### Cadastrar Plano (Apenas Médicos)
+![Cadastrar Plano](/assets/cadastrar%20plano.png)
+
+### Comprovante de Consulta (PDF)
+![Comprovante de Consulta (PDF)](/assets/comprovante%20de%20consulta.png)
+
+## ▶️ Como Executar Localmente
+
+### 1. Clone o projeto
+```bash
+git clone https://github.com/brenolopes07/WebMedicine.git
+cd WebMedicine
