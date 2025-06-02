@@ -46,10 +46,7 @@ export function ProfileMedico({ usuario }: ProfileMedicoProps) {
         <div className="flex flex-col">
           <p className="font-bold">
             Telefone: <span className="font-normal">{usuario?.phone}</span>
-          </p>
-          <p className="font-bold">
-            Endereco:<span className="font-normal"> {usuario?.adress}</span>
-          </p>
+          </p>          
           <p className="font-bold">
             Preço por consulta:
             <span className="font-normal ml-1">

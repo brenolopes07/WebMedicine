@@ -97,6 +97,7 @@ export default function Perfil() {
           <NotLoginPage></NotLoginPage>
         )}
       </div>
+      
     </>
   );
 }

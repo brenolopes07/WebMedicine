@@ -98,12 +98,7 @@ export function EditarMedicoModal() {
               placeholder="Telefone"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-            />
-            <Input
-              placeholder="Endereço"
-              value={adress}
-              onChange={(e) => setAdress(e.target.value)}
-            />
+            />       
             <Input
               placeholder="Especialidade"
               value={especialidade}

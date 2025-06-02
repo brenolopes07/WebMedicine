@@ -50,7 +50,7 @@ export const profileMedicoService = async (id: string) => {
 export const updateMedicoService = async (id:string, data:{
     name?:string,
     phone?:string,
-    especialidade?:string,
+    especialidade?:string,    
     price?: string,
     Planos?:{name: string}[],
 }) => {
@@ -65,7 +65,7 @@ export const updateMedicoService = async (id:string, data:{
             name: data.name,
             phone: data.phone,
             especialidade: data.especialidade,
-            price: data.price,
+            price: data.price,            
             Planos: {
                 connect:planosID.map(plano=>({id:plano.id}))
             }

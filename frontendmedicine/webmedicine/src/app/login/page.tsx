@@ -44,6 +44,7 @@ export default function LoginPage(){
             setError(err.message);
         }
     };
+  
 
     return (
       <div className="flex flex-col min-h-screen min-w-screen items-center justify-center bg-gradient-to-r from-blue-400 to-blue-100">
@@ -65,6 +66,7 @@ export default function LoginPage(){
             onChange={(e) => setEmail(e.target.value)}
             className="mb-4 bg-white"
             required
+            
             
           ></Input>
           <Input
